@@ -6,7 +6,7 @@ from aiogram import Router, F
 from aiogram.types import Message
 
 from src.bot.bot import bot
-from src.services.recognizer import transcrible
+from src.prompts import prompt_v1
 
 router: Router = Router()
 
@@ -15,7 +15,8 @@ router: Router = Router()
 async def text_help(message: Message, con=container):
     answer: str = await con.openai_worker.get_product_info(
         query=message.text,
-        user=message.from_user.id
+        user=message.from_user.id,
+        prompt=prompt_v1
     )
     await message.answer(answer, parse_mode=ParseMode.MARKDOWN)
 
@@ -30,7 +31,8 @@ async def voice_help(message: Message, con=container):
 
     answer: str = await con.openai_worker.get_product_info(
         query=query,
-        user=message.from_user.id
+        user=message.from_user.id,
+        prompt=prompt_v1
     )
 
     await message.answer(answer, parse_mode=ParseMode.MARKDOWN)

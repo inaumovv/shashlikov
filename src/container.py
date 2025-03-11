@@ -11,6 +11,6 @@ openai_worker: OpenAIWorker = OpenAIWorker(
     settings.OPENAI_PROJECT
 )
 
-recognizer: Recognizer = Recognizer()
+recognizer: Recognizer = Recognizer(settings.YANDEX_API_KEY)
 
 keyboards: Keyboards = Keyboards()
